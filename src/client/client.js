@@ -1,21 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { LoadingContext } from "../LoadingContext/LoadingContext";
 
 export const useFetch = (url, defaultData) => {
   const [data, updateData] = useState(defaultData);
-  const [isLoading, setIsLoading] = useState(false);
+  const { loading, setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
+      setLoading(true);
       if (!url) {
         updateData(defaultData);
-        setIsLoading(true);
         return;
       }
       const resp = await fetch(url);
       const json = await resp.json();
       updateData(json);
-      setIsLoading(true);
+      setLoading(false);
     }
     fetchData();
   });

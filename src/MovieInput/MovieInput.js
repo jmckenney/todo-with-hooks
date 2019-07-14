@@ -11,7 +11,6 @@ function MovieInput({ saveMovie }) {
     setApikey(event.target.value);
   };
   const handleSubmit = function(event) {
-    debugger;
     event.preventDefault();
     saveMovie(value, apikey);
   };
